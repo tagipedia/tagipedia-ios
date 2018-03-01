@@ -1,0 +1,6 @@
+framework module Tagipedia {
+  umbrella header "Tagipedia.h"
+
+  export *
+  module * { export * }
+}
