@@ -42,3 +42,6 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
 <key>NSLocationAlwaysUsageDescription</key>
 <string>This is the plist item for NSLocationAlwaysUsageDescription</string>
 ```
+
+## Sample code
+https://github.com/tagipedia/tagipedia-ios
