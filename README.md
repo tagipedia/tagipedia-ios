@@ -44,4 +44,4 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
 ```
 
 ## Sample code
-https://github.com/tagipedia/tagipedia-ios
+https://github.com/tagipedia/tagipedia-ios-sample
