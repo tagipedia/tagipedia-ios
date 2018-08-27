@@ -10,6 +10,7 @@
 #import "callbacks.h"
 @interface Tagipedia : NSObject
 @property onNotificationPressed onNotificationPressed;
+@property onLoggedEventRecord onLoggedEventRecord;
 
 @property NSString *clientId;
 @property NSString *clientSecret;

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "Tagipedia"
-  s.version      = "1.0.0"
+  s.version      = "1.1.0"
   s.summary      = "Tagipedia"
   s.homepage     = "https://www.tagipedia.com"
   s.license      = { :type => "Commercial" }
