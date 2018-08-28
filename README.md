@@ -16,6 +16,9 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
     newTBuilder.onNotificationPressed = ^(NSDictionary *data) {
         NSLog(@"topic %@", data[@"topic"]);
         // push your view controller here
+        // or show ad dialog with its assigned template
+        // YOU SHOULD PASS YOUR NAVIGATION CONTROLLER
+        [TUtil showAdDialog:data navigation: self.window.rootViewController];
     };
     // change notify period between different beacons notification in millisecond
     // DEFAULT: 10 * 60 * 1000 (10 minutes)
@@ -23,6 +26,10 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
     // change notify period between same beacons notification in millisecond
     // DEFAULT: 30 * 60 * 1000 (30 minutes)
     [newTBuilder setSameBeaconNotifyPeriod:20000];
+    // to receive event records
+    newTBuilder.onLoggedEventRecord = ^(NSDictionary *data){
+        NSLog(@"data %@", data);
+    };
     [newTBuilder build];
     return YES;
 }

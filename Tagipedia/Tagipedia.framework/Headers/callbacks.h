@@ -9,3 +9,4 @@
 //typedef void (^ onNotificationPressed)(TGTopic *topic);
 typedef void (^ onNotificationPressed)(NSDictionary *data);
 
+typedef void (^ onLoggedEventRecord)(NSDictionary *data);
