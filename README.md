@@ -50,5 +50,10 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
 <string>This is the plist item for NSLocationAlwaysUsageDescription</string>
 ```
 
+### Hint: to show ad with its assigned template.
+```objc
+[TUtil showAdDialog:data navigation: self.window.rootViewController];
+```
+
 ## Sample code
 https://github.com/tagipedia/tagipedia-ios-sample
