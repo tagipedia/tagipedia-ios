@@ -14,7 +14,7 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     Tagipedia *newTBuilder =[[Tagipedia alloc] initWithClientId:@"CLIENT_ID" clientSecret:@"CLIENT_SECRET" identifer:@"IDENTIFIER" UUID:@"UUID"];
     newTBuilder.onNotificationPressed = ^(NSDictionary *data) {
-        NSLog(@"topic %@", data[@"topic"]);
+        NSLog(@"topic %@", data[@"ad_data"]);
         // push your view controller here
         // or show ad dialog with its assigned template
         // YOU SHOULD PASS YOUR NAVIGATION CONTROLLER
