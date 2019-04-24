@@ -30,7 +30,20 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
     newTBuilder.onLoggedEventRecord = ^(NSDictionary *data){
         NSLog(@"data %@", data);
     };
+    // to receive feature_id if the action of ad is navigate to map location
+    // you should open the map and navigate to the location that recived
+    newTBuilder.onMapButtonPressed = ^(NSDictionary *data){
+        NSLog(@"data %@", data);
+        //you should dispatch to map to show navigation dialog
+        // @{
+        //      @"type": @"SHOW_NAVIGATION_DIALOG",
+        //      @"navigation_params": @{@"route_to": [data valueForKey:@"feature_id"]}
+        // };
+    };
     [newTBuilder build];
+    //to register user with interests
+    //this will show ads based on matching between ad interests and user interests otherwise it will show ads that was created without interests
+    [Tagipedia identifyUser:@"USER_NAME" interests:[NSArray arrayWithObjects:@"INTEREST", @"INTEREST", ..., nil]];
     return YES;
 }
 
@@ -55,6 +68,11 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
 ### Hint: to show ad with its assigned template.
 ```objc
 [TUtil showAdDialog:data navigation: self.window.rootViewController];
+```
+
+### to logout user.
+```objc
+[Tagipedia logOutUser];
 ```
 
 ## Sample code
