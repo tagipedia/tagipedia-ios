@@ -1,4 +1,4 @@
-# tagipedia-ios
+# IOS advertising using beacons
 
 ## Installation
 
