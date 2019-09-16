@@ -14,14 +14,8 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     Tagipedia *newTBuilder =[[Tagipedia alloc] initWithClientId:@"CLIENT_ID" clientSecret:@"CLIENT_SECRET" identifer:@"IDENTIFIER" UUID:@"UUID"];
     
-    //to receive user location using beacon regions
-    NSMutableArray *tBeaconRegions = [[NSMutableArray alloc] init];
-    NSDictionary *beaconRegions = [self JSONFromFile];
-    for(NSDictionary* dict in [beaconRegions valueForKey:@"regions"]){
-        TRegion* tRegion = [[TRegion alloc] initWithUUID:[dict valueForKey:@"UUID"] major:[[dict valueForKey:@"major"] integerValue] minor:[[dict valueForKey:@"minor"] integerValue]];
-        [tBeaconRegions addObject:tRegion];
-    }
-    [newTBuilder setTRegions:tBeaconRegions];
+    //to monitoring specific regions
+    [newTBuilder setTRegions:[NSArray arrayWithObjects:[[TRegion alloc] initWithUUID:@"UUID" major:major minor:minor ], ..., nil]];
     
     newTBuilder.onNotificationPressed = ^(NSDictionary *data) {
         NSLog(@"topic %@", data[@"ad_data"]);
@@ -87,7 +81,7 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
 <string>This is the plist item for NSLocationAlwaysAndWhenInUseUsageDescription</string>
 ```
 
-#### to receive current region user located at when application in background you should add permissions in info.plist
+#### you need also to add background modes in info.plist file.
 ```plist
 <key>UIBackgroundModes</key>
 <array>
