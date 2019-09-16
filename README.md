@@ -24,6 +24,7 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
         // YOU SHOULD PASS YOUR NAVIGATION CONTROLLER
         [TUtil showAdDialog:data navigation: self.window.rootViewController];
     };
+    
     // change notify period between different beacons notification in millisecond
     // DEFAULT: 10 * 60 * 1000 (10 minutes)
     [newTBuilder setDifferentBeaconNotifyPeriod:1000];
