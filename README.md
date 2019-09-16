@@ -60,13 +60,6 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
     [Tagipedia applicationDidBecomeActive];
 }
 
-- (NSDictionary *)JSONFromFile
-{
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"TRegions" ofType:@"json"];
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    return [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-}
-
 ```
 
 
