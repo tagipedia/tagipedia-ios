@@ -13,6 +13,16 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     Tagipedia *newTBuilder =[[Tagipedia alloc] initWithClientId:@"CLIENT_ID" clientSecret:@"CLIENT_SECRET" identifer:@"IDENTIFIER" UUID:@"UUID"];
+    
+    //to receive user location using beacon regions
+    NSMutableArray *tBeaconRegions = [[NSMutableArray alloc] init];
+    NSDictionary *beaconRegions = [self JSONFromFile];
+    for(NSDictionary* dict in [beaconRegions valueForKey:@"regions"]){
+        TRegion* tRegion = [[TRegion alloc] initWithUUID:[dict valueForKey:@"UUID"] major:[[dict valueForKey:@"major"] integerValue] minor:[[dict valueForKey:@"minor"] integerValue]];
+        [tBeaconRegions addObject:tRegion];
+    }
+    [newTBuilder setTRegions:tBeaconRegions];
+    
     newTBuilder.onNotificationPressed = ^(NSDictionary *data) {
         NSLog(@"topic %@", data[@"ad_data"]);
         // push your view controller here
@@ -50,6 +60,18 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     [Tagipedia applicationDidEnterBackground];
 }
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [Tagipedia applicationDidBecomeActive];
+}
+
+- (NSDictionary *)JSONFromFile
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"TRegions" ofType:@"json"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    return [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+}
+
 ```
 
 
@@ -65,6 +87,17 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
 <string>This is the plist item for NSLocationAlwaysAndWhenInUseUsageDescription</string>
 ```
 
+#### to receive current region user located at when application in background you should add permissions in info.plist
+```plist
+<key>UIBackgroundModes</key>
+<array>
+<string>bluetooth-central</string>
+<string>fetch</string>
+<string>location</string>
+<string>remote-notification</string>
+</array>
+```
+
 ### Hint: to show ad with its assigned template.
 ```objc
 [TUtil showAdDialog:data navigation: self.window.rootViewController];
@@ -73,6 +106,11 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
 ### to logout user.
 ```objc
 [Tagipedia logOutUser];
+```
+
+### to receive current region user located at you should set the regions (NSArray of TRegion ) before build
+```objc
+[newTBuilder setTRegions:tBeaconRegions];
 ```
 
 ## Sample code
