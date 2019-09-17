@@ -1,4 +1,4 @@
-# IOS advertising using beacons
+# tagipedia-ios
 
 ## Installation
 
@@ -13,6 +13,10 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     Tagipedia *newTBuilder =[[Tagipedia alloc] initWithClientId:@"CLIENT_ID" clientSecret:@"CLIENT_SECRET" identifer:@"IDENTIFIER" UUID:@"UUID"];
+    
+    //to monitoring specific regions
+    [newTBuilder setTRegions:[NSArray arrayWithObjects:[[TRegion alloc] initWithUUID:@"UUID" major:major minor:minor ], ..., nil]];
+    
     newTBuilder.onNotificationPressed = ^(NSDictionary *data) {
         NSLog(@"topic %@", data[@"ad_data"]);
         // push your view controller here
@@ -20,6 +24,7 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
         // YOU SHOULD PASS YOUR NAVIGATION CONTROLLER
         [TUtil showAdDialog:data navigation: self.window.rootViewController];
     };
+    
     // change notify period between different beacons notification in millisecond
     // DEFAULT: 10 * 60 * 1000 (10 minutes)
     [newTBuilder setDifferentBeaconNotifyPeriod:1000];
@@ -30,13 +35,31 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
     newTBuilder.onLoggedEventRecord = ^(NSDictionary *data){
         NSLog(@"data %@", data);
     };
+    // to receive feature_id if the action of ad is navigate to map location
+    // you should open the map and navigate to the location that recived
+    newTBuilder.onMapButtonPressed = ^(NSDictionary *data){
+        NSLog(@"data %@", data);
+        //you should dispatch to map to show navigation dialog
+        // @{
+        //      @"type": @"SHOW_NAVIGATION_DIALOG",
+        //      @"navigation_params": @{@"route_to": [data valueForKey:@"feature_id"]}
+        // };
+    };
     [newTBuilder build];
+    //to register user with interests
+    //this will show ads based on matching between ad interests and user interests otherwise it will show ads that was created without interests
+    [Tagipedia identifyUser:@"USER_NAME" interests:[NSArray arrayWithObjects:@"INTEREST", @"INTEREST", ..., nil]];
     return YES;
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     [Tagipedia applicationDidEnterBackground];
 }
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [Tagipedia applicationDidBecomeActive];
+}
+
 ```
 
 
@@ -52,9 +75,30 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
 <string>This is the plist item for NSLocationAlwaysAndWhenInUseUsageDescription</string>
 ```
 
+#### you need also to add background modes in info.plist file.
+```plist
+<key>UIBackgroundModes</key>
+<array>
+<string>bluetooth-central</string>
+<string>fetch</string>
+<string>location</string>
+<string>remote-notification</string>
+</array>
+```
+
 ### Hint: to show ad with its assigned template.
 ```objc
 [TUtil showAdDialog:data navigation: self.window.rootViewController];
+```
+
+### to logout user.
+```objc
+[Tagipedia logOutUser];
+```
+
+### to receive current region user located at you should set the regions (NSArray of TRegion ) before build
+```objc
+[newTBuilder setTRegions:tBeaconRegions];
 ```
 
 ## Sample code
