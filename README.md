@@ -60,6 +60,10 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
     [Tagipedia applicationDidBecomeActive];
 }
 
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    [Tagipedia applicationWillEnterForeground];
+}
+
 ```
 
 
