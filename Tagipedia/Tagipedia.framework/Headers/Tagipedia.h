@@ -22,6 +22,7 @@
 - (void)build;
 + (void)applicationDidEnterBackground;
 + (void)applicationDidBecomeActive;
++ (void)applicationWillEnterForeground;
 - (void)setSameBeaconNotifyPeriod:(double)sameBeaconNotifyPeriod;
 - (void)setDifferentBeaconNotifyPeriod:(double)differentBeaconNotifyPeriod;
 - (void)setTRegions:(NSArray*)tRegions;
