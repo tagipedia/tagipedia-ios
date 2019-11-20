@@ -45,6 +45,17 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
         //      @"navigation_params": @{@"route_to": [data valueForKey:@"feature_id"]}
         // };
     };
+    //to receive when user enter beacon region
+    newTBuilder.onEnterBeaconRegion = ^(NSDictionary *data){
+        NSLog(@"data %@", data);
+    };
+    //to receive when user exit beacon region
+    newTBuilder.onExitBeaconRegion = ^(NSDictionary *data){
+        NSLog(@"data %@", data);
+        //time_spent in milliseconds
+        //enter_date and exit_date in millisecond since 1970
+    };
+    
     [newTBuilder build];
     //to register user with interests
     //this will show ads based on matching between ad interests and user interests otherwise it will show ads that was created without interests
