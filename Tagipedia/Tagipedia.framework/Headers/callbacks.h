@@ -13,4 +13,6 @@ typedef void (^ onLoggedEventRecord)(NSDictionary *data);
 
 typedef void (^ onMapButtonPressed)(NSDictionary *data);
 
+typedef void (^ onEnterBeaconRegion)(NSDictionary *data);
 
+typedef void (^ onExitBeaconRegion)(NSDictionary *data);

@@ -12,6 +12,8 @@
 @property onNotificationPressed onNotificationPressed;
 @property onLoggedEventRecord onLoggedEventRecord;
 @property onMapButtonPressed onMapButtonPressed;
+@property onEnterBeaconRegion onEnterBeaconRegion;
+@property onExitBeaconRegion onExitBeaconRegion;
 
 @property NSString *clientId;
 @property NSString *clientSecret;
