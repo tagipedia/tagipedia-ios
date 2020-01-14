@@ -48,12 +48,15 @@ pod 'Tagipedia', :git => "https://github.com/tagipedia/tagipedia-ios.git"
     //to receive when user enter beacon region
     newTBuilder.onEnterBeaconRegion = ^(NSDictionary *data){
         NSLog(@"data %@", data);
+        //enter_date the date that the user enter the area which beacon cover it return in millisecond since 1970
+        //data contain enter_date and others data belong to beacon
     };
     //to receive when user exit beacon region
     newTBuilder.onExitBeaconRegion = ^(NSDictionary *data){
         NSLog(@"data %@", data);
-        //time_spent in milliseconds
-        //enter_date and exit_date in millisecond since 1970
+        //time_spent the time that the user spent in the area which beacon cover it return in milliseconds
+        //enter_date and exit_date the date that the user enter and exit the area which beacon cover it return in millisecond since 1970
+        //data contain enter_date, exit_date, time_spent and others data belong to beacon
     };
     
     [newTBuilder build];
